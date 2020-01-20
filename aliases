@@ -4,4 +4,43 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 
 # Quickly serve the current directory as HTTP
-alias serve='ruby -run -e httpd . -p 8000'  # Or python -m SimpleHTTPServer :)
+alias serve="rails s -p 8080"  # Or python -m SimpleHTTPServer :)
+
+# Type quit to exit the terminal
+alias quit="exit"
+
+# homebrew update
+alias update="brew update; brew upgrade"
+
+# browser
+alias chrome="open -a google chrome"
+alias localhost="open http://localhost:8080"
+
+# editors
+alias editor="code"
+alias aliases="editor /Users/matthieudou/.aliases"
+alias pcat="pygmentize -f terminal256 -O style=native -g"
+
+# git aliases
+alias gpm="git pull origin master"
+alias gst="git status"
+alias gd="git diff"
+alias gcm="git checkout master"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+alias gco="git checkout"
+alias gcmsg="git commit -m"
+alias gaa="git add ."
+
+gps() {
+  git push origin $(git branch | grep \* | cut -d ' ' -f2-)
+}
+gpl() {
+  git pull origin $(git branch | grep \* | cut -d ' ' -f2-)
+}
+upload() {
+  if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho upload /path/to/file.md"; return 1; fi
+  curl --progress-bar --upload-file "$1" https://upload.express/upload/$(basename $1) | tee /dev/null
+}
+
+alias cdsmovin="cd ~/code/matthieudou/smovin"
